@@ -45,7 +45,10 @@ function Get-WinCredManagerCredential
         $private:username = $cred.UserName
         $private:securePassword = $cred.CredentialBlob | ConvertTo-SecureString -AsPlainText -Force
         $cred = $null
-        return ConvertFrom-SecureString -SecureString $securePassword -AsPlainText
+        $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($securePassword)
+        $unsecurePassword = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
+        [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($BSTR)
+        return $unsecurePassword
     }
     else
     {
