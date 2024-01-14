@@ -7,7 +7,7 @@ function Main
     # Uri
     Write-Debug "Creating GitHub zip uri."
     $GitHubURI = @{
-        github = "guitarrapc"
+        github = "myGlyphe"
         repository = "WinCredManager"
     }
     $uri = Get-GitHubRepositryURI @GitHubURI
