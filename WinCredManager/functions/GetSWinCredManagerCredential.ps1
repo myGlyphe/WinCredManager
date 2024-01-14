@@ -45,7 +45,7 @@ function Get-WinCredManagerCredential
         $private:username = $cred.UserName
         $private:securePassword = $cred.CredentialBlob | ConvertTo-SecureString -AsPlainText -Force
         $cred = $null
-        return New-Object System.Management.Automation.PSCredential $username, $securePassword
+        return ConvertFrom-SecureString -SecureString $securePassword -AsPlainText
     }
     else
     {
